@@ -15,6 +15,7 @@ cat <<EOF > "$COPR_CONFIG"
 DATA_DIR= "$(pwd)/data"
 SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://praiskup@/praiskup'
 BACKEND_BASE_URL = 'http://copr-be.cloud.fedoraproject.org'
+PUBLIC_COPR_HOSTNAME = "$FE_HOST"
 EOF
 
 cd $CODE

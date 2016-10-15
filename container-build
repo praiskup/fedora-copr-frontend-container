@@ -24,4 +24,5 @@ export PGPORT=$PGPORT
 export PORT=$PORT
 export USERNAME=$USERNAME
 export CODE=$CODE
+export FE_HOST=$FE_HOST
 EOF

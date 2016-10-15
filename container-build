@@ -1,0 +1,27 @@
+#! /bin/sh -x
+
+set -e
+
+for var in USERNAME UID; do
+    eval 'test -z "$'$var'"' && exit 1
+done
+
+useradd $USERNAME -u $UID -d $WORKDIR
+
+for dir in $WORKDIR $PGDATA /data /var/log/copr-frontend
+do
+    test ! -d "$dir" && mkdir "$dir"
+    chown "$USERNAME" "$dir"
+done
+
+su - $USERNAME -c "
+initdb $PGDATA
+"
+
+cat <<EOF > /init-shell
+export PGDATA=$PGDATA
+export PGPORT=$PGPORT
+export PORT=$PORT
+export USERNAME=$USERNAME
+export CODE=$CODE
+EOF

@@ -1,0 +1,37 @@
+#! /bin/bash -x
+
+. /init-shell
+
+export PGHOST=/tmp
+pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
+createdb $USERNAME --owner $USERNAME
+
+redis-server --daemonize yes
+
+cd
+export COPR_CONFIG=`pwd`/copr.config
+mkdir -p data
+cat <<EOF > "$COPR_CONFIG"
+DATA_DIR= "$(pwd)/data"
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://praiskup@/praiskup'
+BACKEND_BASE_URL = 'http://copr-be.cloud.fedoraproject.org'
+EOF
+
+cd $CODE
+
+
+cat <<EOF >~/.bash_history
+./manage.py create_db --alembic alembic.ini
+./manage.py runserver -p $PORT -h 0.0.0.0
+pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
+EOF
+
+if test -f /sql-file; then
+    psql < /sql-file
+else
+    ./manage.py create_db --alembic alembic.ini
+fi
+
+./manage.py runserver -p "$PORT" -h 0.0.0.0
+
+bash

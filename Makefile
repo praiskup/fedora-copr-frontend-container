@@ -13,7 +13,9 @@ endif
 .PHONY: build run
 
 run: build
-	# chcon -R -t svirt_sandbox_file_t $(SOURCE)
+	$(MAKE) run-only
+
+run-only:
 	docker run --rm -ti                  \
 	    -p $(PORT):$(PORT)               \
 	    -v $(SOURCE):$(CODE):Z,ro        \

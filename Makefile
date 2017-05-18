@@ -5,9 +5,9 @@ NAME     = copr-frontend
 UID      = $(shell id -u)
 USERNAME = $(shell id -u -n)
 PORT     = 55555
-SQLFILE  = /sql-file
-ifdef SQLSOURCE
-    SQLMOUNT = -v $(SQLSOURCE):$(SQLFILE):ro,Z
+
+ifdef INITDIR
+    SQLMOUNT_ARGS = -v $(INITDIR):/copr.init.d:ro,Z
 endif
 
 .PHONY: build run
@@ -18,8 +18,9 @@ run: build
 run-only:
 	docker run --rm -ti                  \
 	    -p $(PORT):$(PORT)               \
-	    -v $(SOURCE):$(CODE):Z,ro        \
-	    $(SQLMOUNT)                      \
+	    -v $(SOURCE):$(CODE):Z,rw        \
+	    -e TEST_REMOTE_USER=praiskup     \
+	    $(SQLMOUNT_ARGS)                 \
 	    $(NAME) $(CMD)
 
 build:

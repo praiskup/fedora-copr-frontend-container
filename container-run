@@ -9,30 +9,57 @@ createdb $USERNAME --owner $USERNAME
 redis-server --daemonize yes
 
 cd
-export COPR_CONFIG=`pwd`/copr.config
 mkdir -p data
 cat <<EOF > "$COPR_CONFIG"
 DATA_DIR= "$(pwd)/data"
 SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://praiskup@/praiskup'
 BACKEND_BASE_URL = 'http://copr-be.cloud.fedoraproject.org'
 PUBLIC_COPR_HOSTNAME = "$FE_HOST"
+LAYOUT_OVERVIEW_HIDE_QUICK_ENABLE = True
+FAS_LOGIN = False
+KRB5_LOGIN = {
+    'RH': {
+        'URI':          "redhat",
+        'log_text':     "Krb5 login",
+        'email_domain': "redhat.com",
+    }
+}
 EOF
 
 cd $CODE
 
 
-cat <<EOF >~/.bash_history
+sql_file=/copr.init.d/sql-file
+
+only_history=false
+if test -f "$sql_file"; then
+    psql < "$sql_file"
+    only_history=true
+else
+    ./manage.py create_db --alembic alembic.ini
+fi
+
+while read line; do
+    $only_history || $line
+    echo "$line" >> ~/.bash_history
+    echo "$line"
+done <<EOF
+./manage.py create_chroot fedora-rawhide-x86_64
+./manage.py create_chroot fedora-rawhide-i386
+./manage.py create_chroot epel-7-x86_64
+./manage.py create_chroot epel-7-i386
+EOF
+
+# Other useful history commands:
+cat >> ~/.bash_history <<EOF
 ./manage.py create_db --alembic alembic.ini
 ./manage.py runserver -p $PORT -h 0.0.0.0
 pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
 EOF
 
-if test -f /sql-file; then
-    psql < /sql-file
-else
-    ./manage.py create_db --alembic alembic.ini
-fi
+alembic upgrade head
 
 ./manage.py runserver -p "$PORT" -h 0.0.0.0
 
+# Get a shell instead of exit ..
 bash

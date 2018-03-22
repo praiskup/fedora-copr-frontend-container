@@ -57,7 +57,7 @@ cat >> ~/.bash_history <<EOF
 pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
 EOF
 
-alembic upgrade head
+alembic-3 upgrade head
 
 ./manage.py runserver -p "$PORT" -h 0.0.0.0
 

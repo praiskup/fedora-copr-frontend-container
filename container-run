@@ -3,7 +3,7 @@
 . /init-shell
 
 export PGHOST=/tmp
-pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
+setsid pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
 createdb $USERNAME --owner $USERNAME
 
 redis-server --daemonize yes

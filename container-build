@@ -8,15 +8,12 @@ done
 
 useradd $USERNAME -u $UID -d $WORKDIR
 
-for dir in $WORKDIR $PGDATA /data /var/log/copr-frontend
+dirs="$WORKDIR $PGDATA /data /var/log/copr-frontend"
+for dir in $dirs
 do
     test ! -d "$dir" && mkdir "$dir"
-    chown "$USERNAME" "$dir"
+    chown "$USERNAME:$USERNAME" "$dir"
 done
-
-su - $USERNAME -c "
-initdb $PGDATA
-"
 
 cat <<EOF > /init-shell
 export PGDATA=$PGDATA

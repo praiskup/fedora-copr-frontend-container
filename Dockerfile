@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:rawhide
+FROM registry.fedoraproject.org/fedora:29
 MAINTAINER Pavel Raiskup <praiskup@redhat.com>
 
 ENV container="docker" \
@@ -24,13 +24,13 @@ ARG USERNAME
 ARG UID
 ARG WORKDIR=/copr
 ARG CODE
-ARG PGDATA=/pgdata
+ARG PGDATA
 ARG PORT=55555
 ARG FE_HOST=localhost:$PORT
 
 ENV PGPORT=54321 \
     PGHOST=/tmp \
-    PYTHONPATH=/copr/coprs_frontend
+    PYTHONPATH=/copr/coprs_frontend:/copr/common
 
 WORKDIR $WORKDIR
 
@@ -38,5 +38,8 @@ ADD container-build container-run /
 RUN /container-build
 RUN chown $USERNAME /container-run /var/lib/copr/data/srpm_storage/
 
-USER $USERNAME
+USER $UID
+
+RUN initdb $PGDATA
+
 CMD ["/container-run"]

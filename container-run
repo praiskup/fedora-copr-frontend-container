@@ -28,7 +28,6 @@ EOF
 
 cd $CODE
 
-
 sql_file=/copr.init.d/sql-file
 
 only_history=false

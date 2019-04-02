@@ -15,7 +15,6 @@ DATA_DIR= "$(pwd)/data"
 SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://praiskup@/praiskup'
 BACKEND_BASE_URL = 'http://copr-be.cloud.fedoraproject.org'
 PUBLIC_COPR_HOSTNAME = "$FE_HOST"
-LAYOUT_OVERVIEW_HIDE_QUICK_ENABLE = True
 FAS_LOGIN = False
 KRB5_LOGIN = {
     'RH': {
@@ -24,6 +23,7 @@ KRB5_LOGIN = {
         'email_domain': "redhat.com",
     }
 }
+COPR_DIST_GIT_LOGS_URL = "https://example.com"
 EOF
 
 cd $CODE

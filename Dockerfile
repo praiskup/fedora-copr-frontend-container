@@ -2,21 +2,23 @@ FROM registry.fedoraproject.org/fedora:29
 MAINTAINER Pavel Raiskup <praiskup@redhat.com>
 
 ENV container="docker" \
-    COPR_CONFIG=/copr/copr.config
+    COPR_CONFIG=/copr/copr.config \
+    PYTHONDONTWRITEBYTECODE=yes
 
 RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
     && dnf -y copr enable praiskup/copr-dev \
     && dnf -y --setopt=tsflags=nodocs install \
         copr-frontend \
-        postgresql-server \
-        ipython3 \
-        mod_wsgi \
-        passwd \
         dnf \
         findutils \
-        tmux \
+        ipython3 \
         libmodulemd \
+        mod_wsgi \
+        passwd \
+        postgresql-server \
         procps-ng \
+        python3-ipdb \
+        tmux \
     && mkdir -p /var/log/copr-frontend \
     && dnf -y --setopt=tsflags=nodocs clean all --enablerepo='*'
 

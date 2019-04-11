@@ -2,6 +2,7 @@
 
 . /init-shell
 
+export PYTHONDONTWRITEBYTECODE=yes
 export PGHOST=/tmp
 setsid pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
 createdb $USERNAME --owner $USERNAME

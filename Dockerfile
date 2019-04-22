@@ -6,7 +6,7 @@ ENV container="docker" \
     PYTHONDONTWRITEBYTECODE=yes
 
 RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
-    && dnf -y copr enable praiskup/copr-dev \
+    && dnf -y copr enable @copr/copr-dev \
     && dnf -y --setopt=tsflags=nodocs install \
         copr-frontend \
         dnf \

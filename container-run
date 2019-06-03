@@ -13,7 +13,7 @@ cd
 mkdir -p data
 cat <<EOF > "$COPR_CONFIG"
 DATA_DIR= "$(pwd)/data"
-SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://praiskup@/coprdb'
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://praiskup@/coprdb?client_encoding=utf8'
 BACKEND_BASE_URL = 'http://copr-be.cloud.fedoraproject.org'
 PUBLIC_COPR_HOSTNAME = "$FE_HOST"
 FAS_LOGIN = False

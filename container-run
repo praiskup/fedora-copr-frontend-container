@@ -13,7 +13,7 @@ cd
 mkdir -p data
 cat <<EOF > "$COPR_CONFIG"
 DATA_DIR= "$(pwd)/data"
-SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://praiskup@/praiskup'
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://praiskup@/coprdb'
 BACKEND_BASE_URL = 'http://copr-be.cloud.fedoraproject.org'
 PUBLIC_COPR_HOSTNAME = "$FE_HOST"
 FAS_LOGIN = False
@@ -33,7 +33,7 @@ sql_file=/copr.init.d/sql-file
 
 only_history=false
 if test -f "$sql_file"; then
-    psql < "$sql_file"
+    psql -d coprdb < "$sql_file"
     only_history=true
 else
     ./manage.py create_db --alembic alembic.ini

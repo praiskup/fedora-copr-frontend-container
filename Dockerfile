@@ -3,6 +3,7 @@ MAINTAINER Pavel Raiskup <praiskup@redhat.com>
 
 ENV container="docker" \
     COPR_CONFIG=/copr/copr.config \
+    PGDATABASE=coprdb \
     PYTHONDONTWRITEBYTECODE=yes
 
 RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \

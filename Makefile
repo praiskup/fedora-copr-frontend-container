@@ -1,8 +1,8 @@
 WORKDIR  = /copr
 CODE     = $(WORKDIR)/coprs_frontend
 COMMON   = $(WORKDIR)/common
-SOURCE   = `pwd`/../coprs_frontend
-SOURCE_COMMON = `pwd`/../../common
+SOURCE   = `pwd`/../copr/frontend/coprs_frontend
+SOURCE_COMMON = `pwd`/../copr/common
 NAME     = copr-frontend
 UID      = $(shell id -u)
 USERNAME = $(shell id -u -n)
@@ -32,11 +32,11 @@ build:
 	umask 0002 ;                         \
 	buildah bud                          \
 	    --layers                         \
+	    --tag $(NAME)                    \
 	    --build-arg=UID=$(UID)           \
 	    --build-arg=CODE=$(CODE)         \
 	    --build-arg=WORKDIR=$(WORKDIR)   \
 	    --build-arg=USERNAME=$(USERNAME) \
 	    --build-arg=PORT=$(PORT)         \
 	    --build-arg=PGDATA=$(PGDATA)     \
-	    --tag $(NAME)                    \
 	    .

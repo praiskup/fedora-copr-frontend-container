@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:29
+FROM registry.fedoraproject.org/fedora:30
 MAINTAINER Pavel Raiskup <praiskup@redhat.com>
 
 ENV container="docker" \

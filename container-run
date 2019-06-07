@@ -57,8 +57,7 @@ cat >> ~/.bash_history <<EOF
 pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
 EOF
 
-cat >> ~/.psqlrc <<EOF
-\pset linestyle unicode
+cat >> ~/.psqlrc <<'EOF'
 \pset border 2
 
 -- Switch pagers with :x and :xx commands

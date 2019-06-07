@@ -18,6 +18,7 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         passwd \
         postgresql-server \
         procps-ng \
+        pspg \
         python3-ipdb \
         tmux \
     && mkdir -p /var/log/copr-frontend \

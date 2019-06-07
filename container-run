@@ -57,6 +57,16 @@ cat >> ~/.bash_history <<EOF
 pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
 EOF
 
+cat >> ~/.psqlrc <<EOF
+\pset linestyle unicode
+\pset border 2
+
+-- Switch pagers with :x and :xx commands
+\set x '\\setenv PAGER less'
+\set xx '\\setenv PAGER \'pspg -bX --no-mouse\''
+:xx
+EOF
+
 alembic-3 upgrade head
 
 ./manage.py runserver -p "$PORT" -h 0.0.0.0

@@ -25,6 +25,7 @@ run-only:
 	    -v $(SOURCE):$(CODE):Z,rw        \
 	    -v $(SOURCE_COMMON):$(COMMON):Z,rw \
 	    -e TEST_REMOTE_USER=praiskup     \
+	    --tmpfs=/tmp                     \
 	    $(SQLMOUNT_ARGS)                 \
 	    $(NAME) $(CMD)
 

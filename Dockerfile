@@ -1,8 +1,7 @@
-FROM registry.fedoraproject.org/fedora:30
+FROM registry.fedoraproject.org/fedora:31
 MAINTAINER Pavel Raiskup <praiskup@redhat.com>
 
-ENV container="docker" \
-    COPR_CONFIG=/copr/copr.config \
+ENV COPR_CONFIG=/copr/copr.config \
     PGDATABASE=coprdb \
     PYTHONDONTWRITEBYTECODE=yes
 
@@ -12,6 +11,7 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         copr-frontend \
         dnf \
         findutils \
+        html2text \
         ipython3 \
         libmodulemd \
         mod_wsgi \
@@ -20,6 +20,7 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         procps-ng \
         pspg \
         python3-ipdb \
+        python3-flask-cache \
         tmux \
     && mkdir -p /var/log/copr-frontend \
     && dnf -y --setopt=tsflags=nodocs clean all --enablerepo='*'
@@ -42,7 +43,7 @@ ADD container-build container-run /
 RUN /container-build
 RUN chown $USERNAME /container-run /var/lib/copr/data/srpm_storage/
 
-USER $UID
+USER $USERNAME
 
 RUN initdb $PGDATA
 

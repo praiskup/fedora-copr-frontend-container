@@ -4,7 +4,7 @@
 
 export PYTHONDONTWRITEBYTECODE=yes
 export PGHOST=/tmp
-setsid pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
+setsid pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT -c listen_addresses=127.0.0.1"
 createdb $PGDATABASE --owner $USERNAME
 
 redis-server --daemonize yes
@@ -16,7 +16,7 @@ DATA_DIR= "$(pwd)/data"
 SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://praiskup@/coprdb?client_encoding=utf8'
 BACKEND_BASE_URL = 'http://copr-be.cloud.fedoraproject.org'
 PUBLIC_COPR_HOSTNAME = "$FE_HOST"
-FAS_LOGIN = False
+FAS_LOGIN = True
 KRB5_LOGIN = {
     'RH': {
         'URI':          "redhat",

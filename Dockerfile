@@ -20,6 +20,7 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         procps-ng \
         pspg \
         python3-ipdb \
+        python3-pip \
         python3-flask-cache \
         tmux \
     && mkdir -p /var/log/copr-frontend \
@@ -46,5 +47,7 @@ RUN chown $USERNAME /container-run /var/lib/copr/data/srpm_storage/
 USER $USERNAME
 
 RUN initdb $PGDATA
+
+RUN echo "log_min_duration_statement = 100" >> "$PGDATA"/postgresql.conf
 
 CMD ["/container-run"]

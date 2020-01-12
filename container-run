@@ -53,7 +53,7 @@ EOF
 # Other useful history commands:
 cat >> ~/.bash_history <<EOF
 ./manage.py create_db --alembic alembic.ini
-./manage.py runserver -p $PORT -h 0.0.0.0
+./manage.py runserver -p $PORT -h 0.0.0.0 --reload
 pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
 EOF
 
@@ -68,7 +68,7 @@ EOF
 
 alembic-3 upgrade head
 
-./manage.py runserver -p "$PORT" -h 0.0.0.0
+./manage.py runserver -p "$PORT" -h 0.0.0.0 --reload
 
 # Get a shell instead of exit ..
 bash

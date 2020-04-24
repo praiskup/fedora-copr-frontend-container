@@ -58,6 +58,7 @@ pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT"
 EOF
 
 cat >> ~/.psqlrc <<'EOF'
+\pset linestyle unicode
 \pset border 2
 
 -- Switch pagers with :x and :xx commands

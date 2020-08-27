@@ -1,9 +1,11 @@
-FROM registry.fedoraproject.org/fedora:31
+FROM registry.fedoraproject.org/fedora:32
+
 MAINTAINER Pavel Raiskup <praiskup@redhat.com>
 
 ENV COPR_CONFIG=/copr/copr.config \
     PGDATABASE=coprdb \
-    PYTHONDONTWRITEBYTECODE=yes
+    PYTHONDONTWRITEBYTECODE=yes \
+    LANG=C.UTF-8
 
 RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
     && dnf -y copr enable @copr/copr-dev \
@@ -13,6 +15,7 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         findutils \
         html2text \
         ipython3 \
+        js-jquery \
         libmodulemd \
         mod_wsgi \
         passwd \

@@ -22,4 +22,5 @@ export PORT=$PORT
 export USERNAME=$USERNAME
 export CODE=$CODE
 export FE_HOST=$FE_HOST
+export REMOTE_USER=praiskup
 EOF

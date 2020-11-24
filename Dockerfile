@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:32
+FROM registry.fedoraproject.org/fedora:33
 
 MAINTAINER Pavel Raiskup <praiskup@redhat.com>
 
@@ -21,10 +21,13 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         passwd \
         postgresql-server \
         procps-ng \
+        psmisc \
         pspg \
+        python3-anytree \
+        python3-email-validator \
         python3-ipdb \
         python3-pip \
-        python3-flask-cache \
+        python3-flask-caching \
         tmux \
     && mkdir -p /var/log/copr-frontend \
     && dnf -y --setopt=tsflags=nodocs clean all --enablerepo='*'

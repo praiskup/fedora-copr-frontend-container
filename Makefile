@@ -33,7 +33,6 @@ run-only:
 build:
 	umask 0002 ;                         \
 	buildah bud                          \
-	    --cap-add="CAP_SETFCAP"          \
 	    --layers                         \
 	    --tag $(NAME)                    \
 	    --build-arg=UID=$(UID)           \

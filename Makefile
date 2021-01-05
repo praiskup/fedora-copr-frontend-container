@@ -22,7 +22,7 @@ run-only:
 	umask 0002 ;                         \
 	podman run --rm -ti                  \
 	    -p $(PORT):$(PORT)               \
-	    -p 54321                         \
+	    -p 54321:54321                   \
 	    -v $(SOURCE):$(CODE):Z,rw        \
 	    -v $(SOURCE_COMMON):$(COMMON):Z,rw \
 	    -e TEST_REMOTE_USER=praiskup     \

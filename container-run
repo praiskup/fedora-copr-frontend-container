@@ -18,6 +18,7 @@ DATA_DIR= "$(pwd)/data"
 SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://praiskup@/coprdb?client_encoding=utf8'
 BACKEND_BASE_URL = 'http://copr-be.cloud.fedoraproject.org'
 PUBLIC_COPR_HOSTNAME = "$FE_HOST"
+DIST_GIT_CLONE_URL = "https://copr-dist-git-dev.fedorainfracloud.org/git"
 FAS_LOGIN = True
 KRB5_LOGIN = {
     'RH': {

@@ -9,6 +9,7 @@ ENV COPR_CONFIG=/copr/copr.config \
 
 RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
     && dnf -y copr enable @copr/copr-dev \
+    && dnf -y copr enable praiskup/flask-shell-ipython \
     && dnf -y --setopt=tsflags=nodocs install \
         copr-frontend \
         dnf \
@@ -28,6 +29,7 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         python3-ipdb \
         python3-pip \
         python3-flask-caching \
+        python3-flask-shell-ipython \
         tmux \
     && mkdir -p /var/log/copr-frontend \
     && dnf -y --setopt=tsflags=nodocs clean all --enablerepo='*'

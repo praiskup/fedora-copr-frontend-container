@@ -28,9 +28,12 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         python3-email-validator \
         python3-ipdb \
         python3-pip \
+        python3-psutil \
         python3-flask-caching \
         python3-flask-shell-ipython \
         tmux \
+        vim \
+        htop \
     && mkdir -p /var/log/copr-frontend \
     && dnf -y --setopt=tsflags=nodocs clean all --enablerepo='*'
 

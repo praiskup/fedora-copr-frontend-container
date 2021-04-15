@@ -47,7 +47,7 @@ ARG FE_HOST=localhost:$PORT
 
 ENV PGPORT=54321 \
     PGHOST=/tmp \
-    PYTHONPATH=/copr/coprs_frontend:/copr/common
+    PYTHONPATH=/copr/coprs_frontend:/copr/common:/usr/local/lib/python3.9/site-packages
 
 WORKDIR $WORKDIR
 

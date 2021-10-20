@@ -29,6 +29,7 @@ KRB5_LOGIN = {
 }
 COPR_DIST_GIT_LOGS_URL = "https://example.com"
 SQLALCHEMY_ECHO = False
+DEBUG_CHECKPOINTS = True
 EOF
 
 cd $CODE

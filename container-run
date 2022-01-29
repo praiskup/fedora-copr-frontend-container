@@ -34,11 +34,11 @@ EOF
 
 cd $CODE
 
-sql_file=/copr.init.d/sql-file
+sql_file=/copr.init.d/sql-file.xz
 
 only_history=false
 if test -f "$sql_file"; then
-    psql -d coprdb < "$sql_file"
+    xz -d < "$sql_file" | psql -d coprdb
     only_history=true
 else
     ./manage.py create_db --alembic alembic.ini

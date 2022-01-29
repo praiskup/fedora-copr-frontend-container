@@ -15,6 +15,7 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         dnf \
         findutils \
         html2text \
+        htop \
         ipython3 \
         js-jquery \
         libmodulemd \
@@ -33,7 +34,7 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         python3-flask-shell-ipython \
         tmux \
         vim \
-        htop \
+        xz \
     && mkdir -p /var/log/copr-frontend \
     && dnf -y --setopt=tsflags=nodocs clean all --enablerepo='*'
 

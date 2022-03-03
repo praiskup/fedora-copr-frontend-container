@@ -34,7 +34,14 @@ EOF
 
 cd $CODE
 
-sql_file=/copr.init.d/sql-file.xz
+sql_files="
+    /copr.init.d/sql-file.gz
+    /copr.init.d/sql-file.xz
+"
+sql_file=
+for file in $sql_file; do
+    test -f "$file" && sql_file=$file
+done
 
 only_history=false
 if test -f "$sql_file"; then

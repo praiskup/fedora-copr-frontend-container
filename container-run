@@ -39,8 +39,8 @@ sql_files="
     /copr.init.d/sql-file.xz
 "
 sql_file=
-for file in $sql_file; do
-    test -f "$file" && sql_file=$file
+for file in $sql_files; do
+    test -f "$file" && sql_file=$file && break
 done
 
 only_history=false

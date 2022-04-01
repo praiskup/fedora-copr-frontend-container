@@ -21,11 +21,8 @@ PUBLIC_COPR_HOSTNAME = "$FE_HOST"
 DIST_GIT_CLONE_URL = "https://copr-dist-git-dev.fedorainfracloud.org/git"
 FAS_LOGIN = True
 KRB5_LOGIN = {
-    'RH': {
-        'URI':          "redhat",
-        'log_text':     "Krb5 login",
-        'email_domain': "redhat.com",
-    }
+    'log_text':     "Krb5 login",
+    'email_domain': "redhat.com",
 }
 COPR_DIST_GIT_LOGS_URL = "https://example.com"
 SQLALCHEMY_ECHO = False

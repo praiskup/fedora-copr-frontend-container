@@ -23,8 +23,8 @@ run-only:
 	podman run --rm -ti                  \
 	    -p $(PORT):$(PORT)               \
 	    -p 54321:54321                   \
-	    -v $(SOURCE):$(CODE):Z,rw        \
-	    -v $(SOURCE_COMMON):$(COMMON):Z,rw \
+	    -v $(SOURCE):$(CODE):Z           \
+	    -v $(SOURCE_COMMON):$(COMMON):Z  \
 	    -e TEST_REMOTE_USER=praiskup     \
 	    --tmpfs=/tmp                     \
 	    $(SQLMOUNT_ARGS)                 \

@@ -30,6 +30,9 @@ run-only:
 	    $(SQLMOUNT_ARGS)                 \
 	    $(NAME) $(CMD)
 
+delete:
+	podman rmi copr-frontend
+
 build:
 	umask 0002 ;                         \
 	buildah bud                          \

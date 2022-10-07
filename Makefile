@@ -3,6 +3,7 @@ CODE     = $(WORKDIR)/coprs_frontend
 COMMON   = $(WORKDIR)/common
 SOURCE   = `pwd`/../copr/frontend/coprs_frontend
 SOURCE_COMMON = `pwd`/../copr/common
+SOURCE_DIRS = $(SOURCE) $(SOURCE_COMMON)
 NAME     = copr-frontend
 UID      = $(shell id -u)
 USERNAME = $(shell id -u -n)
@@ -13,12 +14,18 @@ ifdef INITDIR
     SQLMOUNT_ARGS = -v $(INITDIR):/copr.init.d:ro,Z
 endif
 
-.PHONY: build run
+.PHONY: build run fix-permissions
 
 run: build
 	$(MAKE) run-only
 
-run-only:
+fix-permissions:
+	umask 0002 ;                         \
+	find $(SOURCE_DIRS) -type d             -exec chmod a+rx {} + ; \
+	find $(SOURCE_DIRS) -type f             -exec chmod a+r  {} + ; \
+	find $(SOURCE_DIRS) -type f -executable -exec chmod a+x  {} + ;
+
+run-only: fix-permissions
 	umask 0002 ;                         \
 	podman run --rm -ti                  \
 	    -p $(PORT):$(PORT)               \

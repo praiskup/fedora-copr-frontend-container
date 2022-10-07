@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:35
+FROM registry.fedoraproject.org/fedora:36
 
 MAINTAINER Pavel Raiskup <praiskup@redhat.com>
 
@@ -32,6 +32,7 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         python3-psutil \
         python3-flask-caching \
         python3-flask-shell-ipython \
+        python3-templated-dictionary \
         tmux \
         vim \
         xz \

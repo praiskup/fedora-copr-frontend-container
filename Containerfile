@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:37
+FROM registry.fedoraproject.org/fedora:38
 
 MAINTAINER Pavel Raiskup <praiskup@redhat.com>
 
@@ -26,6 +26,8 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         psmisc \
         pspg \
         python3-anytree \
+        python3-backoff \
+        python3-sqlalchemy-utils \
         python3-email-validator \
         python3-ipdb \
         python3-pip \

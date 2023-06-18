@@ -32,6 +32,7 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         python3-ipdb \
         python3-pip \
         python3-psutil \
+        python3-flask-restx \
         python3-flask-caching \
         python3-flask-shell-ipython \
         python3-templated-dictionary \

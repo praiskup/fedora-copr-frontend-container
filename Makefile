@@ -1,8 +1,11 @@
 WORKDIR  = /copr
 CODE     = $(WORKDIR)/coprs_frontend
 COMMON   = $(WORKDIR)/common
-SOURCE   = `pwd`/../copr/frontend/coprs_frontend
-SOURCE_COMMON = `pwd`/../copr/common
+
+HOST_SOURCES ?= `pwd`/../copr
+
+SOURCE   = $(HOST_SOURCES)/frontend/coprs_frontend
+SOURCE_COMMON = $(HOST_SOURCES)/common
 SOURCE_DIRS = $(SOURCE) $(SOURCE_COMMON) initdir
 NAME     = copr_frontend_praiskup
 UID      = $(shell id -u)

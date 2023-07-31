@@ -12,14 +12,11 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
     && dnf -y copr enable praiskup/flask-shell-ipython \
     && dnf -y --setopt=tsflags=nodocs install \
         copr-frontend \
-        dnf \
         findutils \
         html2text \
         htop \
         ipython3 \
         js-jquery \
-        libmodulemd \
-        mod_wsgi \
         passwd \
         postgresql-server \
         procps-ng \
@@ -33,7 +30,6 @@ RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
         python3-pip \
         python3-psutil \
         python3-flask-restx \
-        python3-flask-caching \
         python3-flask-shell-ipython \
         python3-templated-dictionary \
         tmux \

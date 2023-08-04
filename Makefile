@@ -26,7 +26,9 @@ fix-permissions:
 	umask 0002 ;                         \
 	find $(SOURCE_DIRS) -type d             -exec chmod a+rx {} + ; \
 	find $(SOURCE_DIRS) -type f             -exec chmod a+r  {} + ; \
-	find $(SOURCE_DIRS) -type f -executable -exec chmod a+x  {} + ;
+	find $(SOURCE_DIRS) -type f -executable -exec chmod a+x  {} + ; \
+	chmod a+w $(SOURCE)/alembic/versions
+
 
 run-only: fix-permissions
 	umask 0002 ;                         \

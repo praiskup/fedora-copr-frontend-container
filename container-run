@@ -7,7 +7,6 @@ set -x
 export PYTHONDONTWRITEBYTECODE=yes
 export PGHOST=/tmp
 setsid pg_ctl start -D $PGDATA -w -o "-k /tmp -p $PGPORT -c listen_addresses=127.0.0.1"
-createdb $PGDATABASE --owner $USERNAME
 
 redis-server --daemonize yes
 

@@ -24,3 +24,8 @@ export CODE=$CODE
 export FE_HOST=$FE_HOST
 export REMOTE_USER=praiskup
 EOF
+
+sudo -E -u "$USERNAME" initdb "$PGDATA"
+sudo -E -u "$USERNAME" pg_ctl start -D "$PGDATA" -w -o "-k /tmp -p $PGPORT -c listen_addresses=127.0.0.1"
+sudo -E -u "$USERNAME" createdb -h /tmp "$PGDATABASE" --owner "$USERNAME"
+sudo -E -u "$USERNAME" pg_ctl stop -D "$PGDATA" -w

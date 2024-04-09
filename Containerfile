@@ -58,8 +58,6 @@ RUN chown $USERNAME /container-run /var/lib/copr/data/srpm_storage/
 
 USER $USERNAME
 
-RUN initdb $PGDATA
-
 RUN echo "log_min_duration_statement = 40" >> "$PGDATA"/postgresql.conf
 
 RUN echo "shared_buffers = 400" >> "$PGDATA"/postgresql.conf

@@ -56,4 +56,5 @@ build:
 	    --build-arg=USERNAME=$(USERNAME) \
 	    --build-arg=PORT=$(PORT)         \
 	    --build-arg=PGDATA=$(PGDATA)     \
+	    $(SQLMOUNT_ARGS)                 \
 	    .

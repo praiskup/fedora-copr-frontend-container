@@ -30,24 +30,8 @@ EOF
 
 cd $CODE
 
-sql_files="
-    /copr.init.d/sql-file.gz
-    /copr.init.d/sql-file.xz
-"
-sql_file=
-extractor=xz
-for file in $sql_files; do
-    test -f "$file" && sql_file=$file && break
-done
-
-case $sql_file in
-    *xz) extractor=xz ;;
-    *gz) extractor=gzip ;;
-esac
-
 only_history=false
-if test -f "$sql_file"; then
-    $extractor -d < "$sql_file" | psql -d coprdb
+if test -f "/db-initialized"; then
     only_history=true
 else
     ./manage.py create_db --alembic alembic.ini

@@ -28,4 +28,25 @@ EOF
 sudo -E -u "$USERNAME" initdb "$PGDATA"
 sudo -E -u "$USERNAME" pg_ctl start -D "$PGDATA" -w -o "-k /tmp -p $PGPORT -c listen_addresses=127.0.0.1"
 sudo -E -u "$USERNAME" createdb -h /tmp "$PGDATABASE" --owner "$USERNAME"
+
+sql_files="
+    /copr.init.d/sql-file.gz
+    /copr.init.d/sql-file.xz
+"
+sql_file=
+for file in $sql_files; do
+    test -f "$file" && sql_file=$file && break
+done
+
+extractor=xz
+case $sql_file in
+    *xz) extractor=xz ;;
+    *gz) extractor=gzip ;;
+esac
+
+if test -f "$sql_file"; then
+    $extractor -d < "$sql_file" | sudo -E -u "$USERNAME" psql -d "$PGDATABASE" -h /tmp
+    touch /db-initialized
+fi
+
 sudo -E -u "$USERNAME" pg_ctl stop -D "$PGDATA" -w

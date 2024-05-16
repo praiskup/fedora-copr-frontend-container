@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:39
+FROM registry.fedoraproject.org/fedora:41
 
 MAINTAINER Pavel Raiskup <praiskup@redhat.com>
 
@@ -7,7 +7,7 @@ ENV COPR_CONFIG=/copr/copr.config \
     PYTHONDONTWRITEBYTECODE=yes \
     LANG=C.UTF-8
 
-RUN dnf -y --setopt=tsflags=nodocs install dnf dnf-plugins-core \
+RUN dnf -y install dnf5 dnf5-plugins \
     && dnf -y copr enable @copr/copr-dev \
     && dnf -y copr enable praiskup/flask-shell-ipython \
     && dnf -y --setopt=tsflags=nodocs install \
